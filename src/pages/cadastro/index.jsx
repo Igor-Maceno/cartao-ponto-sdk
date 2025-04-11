@@ -9,7 +9,7 @@ import React, { useState } from "react";
 
 import dbData from "../../db/data.json"
 
-export default function Register() {
+export default function Register({ navigation }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [company, setCompany] = useState("");
@@ -86,7 +86,7 @@ export default function Register() {
       </View>
       <View style={styles.link}>
         <Text>Já tem uma conta?</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
           <Text style={{ fontWeight: "800" }}>Entrar</Text>
         </TouchableOpacity>
       </View>
@@ -97,6 +97,9 @@ export default function Register() {
 const styles = StyleSheet.create({
   container: {
     marginTop: 50,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 24,
