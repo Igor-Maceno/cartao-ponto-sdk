@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Modal, View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Menu } from "../../components/menu";
-import { Feather, Ionicons } from "@expo/vector-icons";
+import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 export const Home = () => {
   const [dataFormatada, setDataFormatada] = useState("");
   const [horarioFormatado, setHorarioFormatado] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     const diasDaSemana = [
@@ -59,7 +60,7 @@ export const Home = () => {
         <Ionicons name="notifications-outline" size={30} color="black" />
       </View>
       <View style={styles.greating}>
-        <Text style={{ fontSize: 16 }}>Bom dia,</Text>
+        <Text style={{ fontSize: 16 }}>Boa noite,</Text>
         <Text style={{ fontSize: 36, fontWeight: "bold" }}>Igor</Text>
       </View>
       <View style={styles.time}>
@@ -71,10 +72,51 @@ export const Home = () => {
         </Text>
       </View>
       <View>
-        <TouchableOpacity style={styles.track}>
-          <Text style={{ color: "#FFF", fontSize: 24, fontWeight: "bold" }}>REGISTRAR PONTO</Text>
+        <TouchableOpacity
+          style={styles.track}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={{ color: "#FFF", fontSize: 24, fontWeight: "bold" }}>
+            REGISTRAR PONTO
+          </Text>
         </TouchableOpacity>
       </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Registrar Ponto</Text>
+            <View style={styles.modalBotoes}>
+              <TouchableOpacity
+                onPress={() => {
+                  /* lógica entrada */
+                }}
+                style={styles.opcao1}
+              >
+                <MaterialIcons name="login" size={25} color="#FFF" />
+                <Text style={{color: "#FFF", fontWeight: "bold", fontSize: 16}}>Entrada</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  /* lógica saída */
+                }}
+                style={styles.opcao2}
+              >
+                <MaterialIcons name="logout" size={25} color="#FFF" />
+                <Text style={{color: "#FFF", fontWeight: "bold", fontSize: 16}}>Saída</Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <Text style={{ color: "red", marginTop: 15 }}>Cancelar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
       <Menu />
     </View>
   );
@@ -99,11 +141,53 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   track: {
-    marginTop: 150,
+    marginTop: 200,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#28A745",
     borderRadius: 50,
-    padding: 10
-},
+    padding: 10,
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'flex-end', // Gruda no rodapé
+    backgroundColor: 'rgba(0,0,0,0.3)',
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    padding: 30,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 18,
+    marginBottom: 10,
+    fontWeight: 'bold',
+  },
+  modalBotoes: {
+    flexDirection: 'row',
+    gap: 20,
+  },
+  opcao1: {
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    gap: 10,
+    backgroundColor: "#28A745",
+    padding: 15,
+    borderRadius: 10,
+    minWidth: 150,
+    alignItems: 'center',
+    justifyContent: "center"
+  },
+  opcao2:{
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    gap: 10,
+    backgroundColor: "#DC3545",
+    padding: 15,
+    borderRadius: 10,
+    minWidth: 150,
+    justifyContent: "center"
+  }
 });
