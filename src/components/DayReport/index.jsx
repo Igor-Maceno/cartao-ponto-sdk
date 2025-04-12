@@ -7,7 +7,7 @@ export const DayReport = ({ usuario }) => {
     <View style={{marginTop: 20, marginBottom: 20}}>
       {usuario.registros.map((registro, index) => (
         <View key={index} style={styles.container}>
-          <View style={{ justifyContent: "space-between", flexDirection: "row", flexWrap: "nowrap" }}>
+          <View style={{ justifyContent: "space-between", alignItems: "center", flexDirection: "row", flexWrap: "nowrap" }}>
             <Text style={{fontSize: 14, fontWeight: "bold"}}>{registro.dataCompleta}</Text>
             <Feather name="edit" size={15} color="black" />
           </View>
