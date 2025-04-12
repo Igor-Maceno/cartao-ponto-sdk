@@ -23,7 +23,13 @@ export const Menu = () => {
 
 const styles = StyleSheet.create({
   container:{
-    padding: 30,
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 15,
+    marginRight: 5,
+    marginLeft: 5,
     flexDirection: "row",
     flexWrap: "nowrap",
     justifyContent: "space-between",

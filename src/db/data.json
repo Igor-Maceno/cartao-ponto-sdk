@@ -1,3 +1,74 @@
 {
-    "users": []
-}
+    "users": [
+      {
+        "id": 1,
+        "nome": "Igor",
+        "registros": [
+          {
+            "dataCompleta": "Terça, 01 Abril 2025",
+            "pontos": [
+              { "entrada": "09:00", "saida": "12:00" },
+              { "entrada": "13:00", "saida": "18:00" }
+            ]
+          },
+          {
+            "dataCompleta": "Quarta, 02 Abril 2025",
+            "pontos": [
+              { "entrada": "08:50", "saida": "12:10" },
+              { "entrada": "13:05", "saida": "17:55" }
+            ]
+          },
+          {
+            "dataCompleta": "Quinta, 03 Abril 2025",
+            "pontos": [
+              { "entrada": "09:10", "saida": "12:00" },
+              { "entrada": "13:00", "saida": "18:05" }
+            ]
+          },
+          {
+            "dataCompleta": "Sexta, 04 Abril 2025",
+            "pontos": [
+              { "entrada": "09:00", "saida": "12:00" },
+              { "entrada": "13:00", "saida": "18:00" }
+            ]
+          },
+          {
+            "dataCompleta": "Segunda, 07 Abril 2025",
+            "pontos": [
+              { "entrada": "09:00", "saida": "12:00" },
+              { "entrada": "13:00", "saida": "18:00" }
+            ]
+          },
+          {
+            "dataCompleta": "Terça, 08 Abril 2025",
+            "pontos": [
+              { "entrada": "08:55", "saida": "12:05" },
+              { "entrada": "13:00", "saida": "18:00" }
+            ]
+          },
+          {
+            "dataCompleta": "Quarta, 09 Abril 2025",
+            "pontos": [
+              { "entrada": "09:00", "saida": "12:00" },
+              { "entrada": "13:00", "saida": "17:50" }
+            ]
+          },
+          {
+            "dataCompleta": "Quinta, 10 Abril 2025",
+            "pontos": [
+              { "entrada": "09:05", "saida": "12:05" },
+              { "entrada": "13:00", "saida": "18:00" }
+            ]
+          },
+          {
+            "dataCompleta": "Sexta, 11 Abril 2025",
+            "pontos": [
+              { "entrada": "09:00", "saida": "12:00" },
+              { "entrada": "13:00", "saida": "18:00" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  
