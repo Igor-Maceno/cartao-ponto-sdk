@@ -10,7 +10,7 @@ export const MonthlyReport = () => {
 
   const mesAlvo = "Abril";
   const anoAlvo = "2025";
-  const valorHora = 10; // valor por hora
+  const valorHora = 15;
 
   const registrosFiltrados = registros.filter((registro) => {
     return (
@@ -19,7 +19,7 @@ export const MonthlyReport = () => {
     );
   });
 
-  const calcularHorasTrabalhadas = (entrada, saida) => {
+  const calcularHorasTrabalhadas = (entrada: any, saida: any) => {
     const [h1, m1] = entrada.split(":").map(Number);
     const [h2, m2] = saida.split(":").map(Number);
 

@@ -21,7 +21,7 @@ export const DayReport = ({ usuario }) => {
     return (horasTotais * valorHora).toFixed(2);
   };
 
-  const valorHora = 12.5;
+  const valorHora = 15;
   return (
     <View style={{ marginTop: 20, marginBottom: 20 }}>
       {usuario.registros.map((registro, index) => {
