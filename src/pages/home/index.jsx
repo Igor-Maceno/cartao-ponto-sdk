@@ -48,12 +48,10 @@ export const Home = ({ navigation }) => {
       setDataFormatada(`${diaSemana}, ${dia} ${mes} ${ano}`);
       setHorarioFormatado(`${horas}:${minutos}`);
 
-      const hora = horas < 12 ? "Bom dia" : horas < 18 ? "Boa tarde" : "Boa noite";
+      const hora =
+        horas < 12 ? "Bom dia" : horas < 18 ? "Boa tarde" : "Boa noite";
 
       setGreating(hora);
-
-      console.log(agora.getHours());
-      console.log(hora);
     };
 
     atualizarDataHora(); // chama no início
