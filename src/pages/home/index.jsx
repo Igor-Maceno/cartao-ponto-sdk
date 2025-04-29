@@ -7,6 +7,7 @@ export const Home = ({ navigation }) => {
   const [dataFormatada, setDataFormatada] = useState("");
   const [horarioFormatado, setHorarioFormatado] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [greating, setGreating] = useState("");
 
   useEffect(() => {
     const diasDaSemana = [
@@ -46,6 +47,13 @@ export const Home = ({ navigation }) => {
 
       setDataFormatada(`${diaSemana}, ${dia} ${mes} ${ano}`);
       setHorarioFormatado(`${horas}:${minutos}`);
+
+      const hora = horas < 12 ? "Bom dia" : horas < 18 ? "Boa tarde" : "Boa noite";
+
+      setGreating(hora);
+
+      console.log(agora.getHours());
+      console.log(hora);
     };
 
     atualizarDataHora(); // chama no início
@@ -61,7 +69,7 @@ export const Home = ({ navigation }) => {
           <Ionicons name="notifications-outline" size={30} color="black" />
         </View>
         <View style={styles.greating}>
-          <Text style={{ fontSize: 16 }}>Boa noite,</Text>
+          <Text style={{ fontSize: 16 }}>{greating},</Text>
           <Text style={{ fontSize: 36, fontWeight: "bold" }}>Igor</Text>
         </View>
         <View style={styles.time}>
