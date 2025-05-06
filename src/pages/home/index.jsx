@@ -78,7 +78,7 @@ export const Home = ({ navigation }) => {
             {horarioFormatado}
           </Text>
         </View>
-        <View>
+        <View style={styles.trackContainer}>
           <TouchableOpacity
             style={styles.track}
             onPress={() => setModalVisible(true)}
@@ -155,8 +155,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  trackContainer: {
+    marginTop: 190,
+  },
   track: {
-    marginTop: 200,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#28A745",

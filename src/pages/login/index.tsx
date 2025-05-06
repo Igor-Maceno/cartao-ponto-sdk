@@ -4,16 +4,39 @@ import {
   TouchableOpacity,
   Text,
   View,
+  Alert,
+  Pressable,
 } from "react-native";
 import React, { useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
+import * as LocalAuthentication from "expo-local-authentication";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
   console.log(password, email);
 
-  const handleSubmit = () => {
-    navigation.navigate("Home");
+  const handleSubmit = async () => {
+    const isBiometricEnrolled = await LocalAuthentication.isEnrolledAsync();
+
+    if (!isBiometricEnrolled) {
+      Alert.alert(
+        "Login",
+        "Nenhuma biometria encontrada. Por favor cadastre no seu dispositivo"
+      );
+      return;
+    }
+    const auth = await LocalAuthentication.authenticateAsync({
+      promptMessage: "Login com biometria",
+      fallbackLabel: "Biometria não encontrada",
+    });
+
+    setIsAuth(auth.success);
+    if (auth.success) {
+      navigation.navigate("Home");
+    }
   };
   return (
     <View style={styles.container}>
@@ -25,15 +48,30 @@ export default function Login({ navigation }) {
           value={email}
           onChangeText={setEmail}
         />
-        <TextInput
-          style={styles.input}
-          placeholder={"Senha"}
-          value={password}
-          keyboardType="visible-password"
-          onChangeText={setPassword}
-        />
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.inputWithIcon}
+            placeholder="Senha"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!showPassword}
+          />
+          <Pressable onPress={() => setShowPassword(!showPassword)}>
+            <Ionicons
+              name={showPassword ? "eye-off" : "eye"}
+              size={24}
+              color="#888"
+            />
+          </Pressable>
+        </View>
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Entrar</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity style={styles.fingerPrint} onPress={handleSubmit}>
+          <Ionicons name="finger-print" size={40} color="black" />
+          <Text>Acesse com a Digital</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.link}>
@@ -48,7 +86,7 @@ export default function Login({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
+    marginTop: 150,
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -64,11 +102,26 @@ const styles = StyleSheet.create({
     color: "#5e5e5e",
     width: 300,
     height: 50,
-    padding: 10,
+    padding: 15,
     borderRadius: 15,
     fontSize: 16,
     marginBottom: 16,
     backgroundColor: "#e5e5e5",
+  },
+  inputWithIcon: {
+    flex: 1,
+    color: "#5e5e5e",
+    fontSize: 16,
+  },
+  inputContainer: {
+    width: 300,
+    height: 50,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#e5e5e5",
+    borderRadius: 15,
+    marginBottom: 15,
+    paddingHorizontal: 15,
   },
   button: {
     width: 300,
@@ -84,8 +137,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 800,
   },
-  link: {
+  fingerPrint: {
+    alignItems: "center",
+    justifyContent: "center",
     margin: 50,
+  },
+  link: {
     alignItems: "center",
   },
 });
