@@ -7,16 +7,17 @@ import {
   Alert,
   Pressable,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import * as LocalAuthentication from "expo-local-authentication";
 
-export default function Login({ navigation }) {
+import { NavigationProp } from "@react-navigation/native";
+
+export default function Login({ navigation }: { navigation: NavigationProp<any> }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
-  console.log(password, email);
 
   const handleSubmit = async () => {
     const isBiometricEnrolled = await LocalAuthentication.isEnrolledAsync();
@@ -38,6 +39,10 @@ export default function Login({ navigation }) {
       navigation.navigate("Home");
     }
   };
+
+  useEffect(() => {
+    handleSubmit();
+  }, []);
   return (
     <View style={styles.container}>
       <View>
@@ -64,7 +69,10 @@ export default function Login({ navigation }) {
             />
           </Pressable>
         </View>
-        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Home")}
+        >
           <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
       </View>
