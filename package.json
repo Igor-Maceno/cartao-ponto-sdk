@@ -2,6 +2,7 @@
   "name": "cartao-ponto",
   "version": "1.0.0",
   "main": "index.ts",
+  "author": "Igor Maceno",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",

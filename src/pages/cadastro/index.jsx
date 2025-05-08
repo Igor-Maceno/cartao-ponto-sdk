@@ -4,10 +4,10 @@ import {
   TouchableOpacity,
   Text,
   View,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
-
-import dbData from "../../db/data.json"
+import { registerUser } from "../../services/auth";
 
 export default function Register({ navigation }) {
   const [firstName, setFirstName] = useState("");
@@ -17,19 +17,33 @@ export default function Register({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const numericHourValue = parseFloat(hourValue);
 
   const handleSubmit = async () => {
-    if(password === confirmPassword){
-        const user = {
-            firstName,
-            lastName,
-            company,
-            hourValue,
-            email,
-            password
-          }
-
-          console.log(user)
+    if (password === confirmPassword) {
+      const user = {
+        firstName,
+        lastName,
+        company,
+        numericHourValue,
+        email,
+        password,
+      };
+      console.log(user);
+      try {
+        const response = await registerUser(user);
+        if (response.status === 201) {
+          Alert.alert("Usuário cadastrado com sucesso!");
+          navigation.navigate("Login");
+        } else {
+          Alert.alert("Erro ao cadastrar usuário.");
+        }
+      } catch (error) {
+        console.error("Erro ao cadastrar usuário:", error);
+        Alert.alert("Erro ao cadastrar usuário.");
+      }
+    } else {
+      Alert.alert("As senhas não conferem");
     }
   };
   return (
